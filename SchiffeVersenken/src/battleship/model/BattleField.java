@@ -67,7 +67,6 @@ public class BattleField {
 				countOfShips--;
 			}
 			fireBattleEvent();
-			System.out.println(listeners.size());
 			return true;
 
 		}
@@ -97,10 +96,19 @@ public class BattleField {
 	}
 
 	private void fireBattleEvent() {
-		if(listeners.isEmpty()) return;
+		if (listeners.isEmpty())
+			return;
 		final BattleFieldEvent event = new BattleFieldEvent(this);
 		for (BattleFieldListener listener : listeners) {
 			listener.update(event);
 		}
+	}
+
+	public int getWidth() {
+		return field[0].length;
+	}
+
+	public int getHeight() {
+		return field.length;
 	}
 }
