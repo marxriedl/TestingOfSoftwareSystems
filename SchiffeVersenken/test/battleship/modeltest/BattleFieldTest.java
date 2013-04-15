@@ -27,16 +27,25 @@ public class BattleFieldTest {
 		field = null;
 	}
 
+	/**
+	 * Test if field's width property was set correctly.
+	 */
 	@Test
 	public void correctWidth() {
 		assertEquals(width, field.getWidth());
 	}
 
+	/**
+	 * Test if field's height property was set correctly.
+	 */
 	@Test
 	public void correctHeight() {
 		assertEquals(height, field.getHeight());
 	}
 
+	/**
+	 * Check that the field contains no ships after initialization.
+	 */
 	@Test
 	public void correctShipInitialization() {
 		boolean containsShip = false;
@@ -48,6 +57,9 @@ public class BattleFieldTest {
 		assertFalse(containsShip);
 	}
 
+	/**
+	 * Check that there are no shots on the field after initialization.
+	 */
 	@Test
 	public void correctShotInitialization() {
 		boolean isShotAt = false;
@@ -64,6 +76,10 @@ public class BattleFieldTest {
 		assertFalse(field.isDead());
 	}
 
+	/**
+	 * Test for setShip method. Sets multiple ships at different locations and
+	 * then confirms whether the ships are at the correct place.
+	 */
 	@Test
 	public void setShipsAtPositionRight() {
 		assertTrue(field.setShip(0, 0, BattleShip.BOAT, Direction.RIGHT));
@@ -83,6 +99,10 @@ public class BattleFieldTest {
 				&& field.shipAtPosition(4, 3));
 	}
 
+	/**
+	 * Test for setShip method. Sets multiple ships at different locations and
+	 * then confirms whether the ships are at the correct place.
+	 */
 	@Test
 	public void setShipsAtPositionDown() {
 		assertTrue(field.setShip(0, 0, BattleShip.BOAT, Direction.DOWN));
@@ -102,23 +122,35 @@ public class BattleFieldTest {
 				&& field.shipAtPosition(3, 4));
 	}
 
+	/**
+	 * Try to set a boat at the same start index but other direction.
+	 */
 	@Test
 	public void setShipAtOtherShipPosition() {
 		assertTrue(field.setShip(0, 0, BattleShip.BOAT, Direction.RIGHT));
 		assertFalse(field.setShip(0, 0, BattleShip.BATTLESHIP, Direction.DOWN));
 	}
 
+	/**
+	 * Try to set ship at already occupied position
+	 */
 	@Test
 	public void setShipAtOtherShipPositionDown() {
 		assertTrue(field.setShip(1, 1, BattleShip.BOAT, Direction.DOWN));
 		assertFalse(field.setShip(0, 1, BattleShip.BATTLESHIP, Direction.RIGHT));
 	}
 
+	/**
+	 * Try to set a  ship outside of the field.
+	 */
 	@Test
 	public void setShipOutOfFieldDown() {
 		assertFalse(field.setShip(0, 27, BattleShip.BATTLESHIP, Direction.DOWN));
 	}
-
+	
+	/**
+	 * Try to set a  ship outside of the field.
+	 */
 	@Test
 	public void setShipOutOfFieldRight() {
 		assertFalse(field
@@ -130,12 +162,20 @@ public class BattleFieldTest {
 		assertTrue(field.shotAtPosition(0, 0));
 	}
 
+	/**
+	 * Test for shooting on one and the same field twice. Second shot must be
+	 * illegal.
+	 */
 	@Test
 	public void shotAtPositionTwice() {
 		assertTrue(field.shotAtPosition(0, 0));
 		assertFalse(field.shotAtPosition(0, 0));
 	}
 
+	/**
+	 * Tests the end condition. Sets ship on the field, then shoots each field
+	 * --> must be end of game.
+	 */
 	@Test
 	public void isDeadAfterGame() {
 		assertTrue(field.setShip(0, 0, BattleShip.BOAT, Direction.RIGHT));
@@ -151,6 +191,9 @@ public class BattleFieldTest {
 		assertTrue(field.isDead());
 	}
 
+	/**
+	 * Test event mechanism
+	 */
 	@Test
 	public void getFieldEvent() {
 		field.addBattleFieldListener(new BattleFieldListener() {
@@ -162,7 +205,10 @@ public class BattleFieldTest {
 		});
 		field.shotAtPosition(0, 0);
 	}
-	
+
+	/**
+	 * Test event mechanism
+	 */
 	@Test
 	public void getNoFieldEvent() {
 		BattleFieldListener listener = new BattleFieldListener() {
@@ -174,7 +220,7 @@ public class BattleFieldTest {
 		};
 		field.addBattleFieldListener(listener);
 		field.removeBattleFieldListener(listener);
-		
+
 		field.shotAtPosition(0, 0);
 	}
 }
