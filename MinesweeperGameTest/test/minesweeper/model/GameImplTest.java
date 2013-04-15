@@ -43,7 +43,7 @@ public class GameImplTest {
 	}
 
 	/**
-	 * Test the win condition.
+	 * Test the win event.
 	 */
 	@Test
 	public void testWin() {
@@ -62,7 +62,7 @@ public class GameImplTest {
 	}
 
 	/**
-	 * Check that listeners get removed after winning the game.
+	 * Check that listeners get removed, when invoking removeListener.
 	 */
 	@Test
 	public void testRemoveListener() {
@@ -77,7 +77,7 @@ public class GameImplTest {
 	}
 
 	/**
-	 * Test a normal game.
+	 * Test a normal set in the game, i.e. not hitting a bomb.
 	 */
 	@Test
 	public void testNormalSet() {
@@ -136,6 +136,9 @@ public class GameImplTest {
 		verify(fieldMock, playerMock, listenerMock);
 	}
 
+	/**
+	 * Try setting outside the field (negative x value)
+	 */
 	@Test
 	public void testNegativeX() {
 		expect(fieldMock.everythingFound()).andReturn(false);
@@ -150,6 +153,9 @@ public class GameImplTest {
 		verify(fieldMock, playerMock, listenerMock);
 	}
 
+	/**
+	 * Try setting outside the field (negative y value)
+	 */
 	@Test
 	public void testNegativeY() {
 		expect(fieldMock.everythingFound()).andReturn(false);
@@ -165,6 +171,9 @@ public class GameImplTest {
 		verify(fieldMock, playerMock, listenerMock);
 	}
 
+	/**
+	 * Try setting outside the field (too high x value)
+	 */
 	@Test
 	public void testTooHighX() {
 		expect(fieldMock.everythingFound()).andReturn(false);
@@ -180,6 +189,9 @@ public class GameImplTest {
 		verify(fieldMock, playerMock, listenerMock);
 	}
 
+	/**
+	 * Try setting outside the field (too high y value)
+	 */
 	@Test
 	public void testTooHighY() {
 		expect(fieldMock.everythingFound()).andReturn(false);
@@ -197,7 +209,7 @@ public class GameImplTest {
 	}
 
 	/**
-	 * Setup mocks with expected calls.
+	 * Setup mocks for a normal game exit.
 	 */
 	private void recordNormalSet() {
 		expect(playerMock.set()).andReturn(TEST_POSITION);

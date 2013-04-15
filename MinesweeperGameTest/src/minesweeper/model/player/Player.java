@@ -6,6 +6,7 @@ public interface Player {
 	
 	/**
 	 * calls the player to make a move
+	 * @return the position which the player wants to set
 	 */
 	public Position set();
 

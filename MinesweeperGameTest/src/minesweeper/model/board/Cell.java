@@ -1,5 +1,12 @@
 package minesweeper.model.board;
 
+/**
+ * This cell class models one of the cells of the game field.
+ * It can either contain a bomb or not.
+ * Visible cells have been already set.
+ * @author philipp
+ *
+ */
 public class Cell {
 
 	private static final int BOMB = -1;
